@@ -23,3 +23,4 @@
     title(ylab="Global Active Power(kilowatts)")
 ## Turn off plotting device
 dev.off()
+
