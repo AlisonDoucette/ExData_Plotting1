@@ -1,6 +1,9 @@
 ## Construct a plot and save to plot1.png
-## Read files into directory
-P1Data<-read.table("C:/Alison/R/R Working Directory/Project/ProjectFiles/household_power_consumption.txt", sep=";",header=TRUE)            
+## Read files into '
+    temp <- tempfile()
+    download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
+    P1Data <- read.table(unz(temp, "household_power_consumption.txt"), sep=";",header=TRUE)
+    unlink(temp)
 P1Data$Date <- dmy(P1Data$Date)
 P1Data$Global_active_power[P1Data$Global_active_power == "?"] <- NA
 FebData <- subset(P1Data, Date > as.POSIXct("2007-01-31") )  
