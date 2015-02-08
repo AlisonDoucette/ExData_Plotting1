@@ -1,7 +1,9 @@
 ## Construct a plot and save to plot1.png
 ## Read in data
-
-P1Data<-read.table("C:/Alison/R/R Working Directory/Project/ProjectFiles/household_power_consumption.txt", sep=";",header=TRUE)            
+    temp <- tempfile()
+    download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
+    P1Data <- read.table(unz(temp, "household_power_consumption.txt"), sep=";",header=TRUE)
+    unlink(temp)
 ## Set libraries
 library(lubridate)
 
