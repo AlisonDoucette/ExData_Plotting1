@@ -1,11 +1,13 @@
 ## Construct a plot and save to plot1.png
-## Read in data
+
+## Set libraries
+library(lubridate)
+
+## Download and unzip file and read file
     temp <- tempfile()
     download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
     P1Data <- read.table(unz(temp, "household_power_consumption.txt"), sep=";",header=TRUE)
     unlink(temp)
-## Set libraries
-library(lubridate)
 
 ## Set date to mdy and subset the data to extract just two dates.
     P1Data$Date <- dmy(P1Data$Date)
