@@ -1,17 +1,25 @@
+## Download data and create plot4
+
 ## Add Library
 
     library(lubridate)
 
-## Read and reformat data
+##  Download, unzip and read data into table
+    temp <- tempfile()
+    download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",temp)
+    P1Data <- read.table(unz(temp, "household_power_consumption.txt"), sep=";",header=TRUE)
+    unlink(temp)
     
-    P1Data<-read.table("C:/Alison/R/R Working Directory/Project/ProjectFiles/household_power_consumption.txt", sep=";",header=TRUE)            
+## Reformat Data
     P1Data$Date <- dmy(P1Data$Date)
     P1Data$Global_active_power[P1Data$Global_active_power == "?"] <- NA
     FebData <- subset(P1Data, Date > as.POSIXct("2007-01-31") )  
     FebData2 <- subset(FebData, Date <= as.POSIXct("2007-02-02") ) 
     FebData2$datetime <- paste(FebData2$Date, FebData2$Time)
+    
 ## Set Plot Date
 PlotDate = as.POSIXlt(FebData2$datetime) 
+    
 ## Reformat and compute Global Active Power
     FebData2$Global_active_power <- as.numeric(as.character(FebData2$Global_active_power))
     GAP = FebData2$Global_active_power
